@@ -1,0 +1,66 @@
+# registration review (the index bot): every registration PR gets its
+# records validated by ci/check_record.py (the self-contained mirror of
+# voner-crawl's rules). a PR that ONLY adds/changes records and passes
+# every check is auto-merged (squash) — name claiming is bot-gated
+# first-come; moderation moves to after-the-fact `status: Suspended`.
+# anything else (deletions, non-record files, a failed check) is left
+# to a human with the verdict in a comment.
+name: registration review
+
+on:
+  pull_request:
+    paths: ["repos/**"]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
+
+      - name: changed files
+        id: changed
+        env:
+          BASE: ${{ github.event.pull_request.base.sha }}
+        run: |
+          git fetch --depth=1 origin "$BASE"
+          git diff --name-status "$BASE"..HEAD > /tmp/changed.txt
+          cat /tmp/changed.txt
+
+      - name: validate records
+        id: checks
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR: ${{ github.event.pull_request.number }}
+        run: |
+          set +e
+          HUMAN=0
+          VERDICT=$(mktemp)
+          while read -r status file; do
+            case "$file" in
+              repos/*) ;;
+              *) echo "non-record file touched: $file" >> "$VERDICT"; HUMAN=1; continue;;
+            esac
+            if [ "$status" = "D" ]; then
+              echo "$file: deletions go to a human (suspend instead)" >> "$VERDICT"
+              HUMAN=1
+              continue
+            fi
+            echo "── $file" >> "$VERDICT"
+            python3 ci/check_record.py "$file" >> "$VERDICT" 2>&1
+            if [ $? -ne 0 ]; then HUMAN=1; fi
+          done < /tmp/changed.txt
+          cat "$VERDICT"
+          gh pr comment "$PR" --body "$(printf '### registration review\n```\n%s\n```' "$(cat "$VERDICT")")"
+          if [ "$HUMAN" -eq 0 ]; then
+            gh pr merge "$PR" --squash --subject "registration: auto-approved"
+            echo "auto-merged"
+          else
+            echo "left for a human"
+          fi
