@@ -1,0 +1,17 @@
+(
+    name: "quiet_voice",
+    description: Some("a quieter narration voice: terser verb lines"),
+    role: Some("voice"),
+    versions: [
+        (
+            version: "0.1.0",
+            url: "https://github.com/Aslappyslashy/voner-pack-voice",
+            sha256: "a711b6de2bb1a8de5c08eaec60c8c2c84edc6b96",
+            engine: Some("0.1.0"),
+            depends: [
+                ("base", "*"),
+            ],
+            yanked: false,
+        ),
+    ],
+)

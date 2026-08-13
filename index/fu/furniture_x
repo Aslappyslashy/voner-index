@@ -1,0 +1,17 @@
+(
+    name: "furniture_x",
+    description: Some("hand-made furniture: a pine stool, a long bench, a coat rack"),
+    role: Some("library"),
+    versions: [
+        (
+            version: "0.1.0",
+            url: "https://github.com/Aslappyslashy/voner-pack-furniture",
+            sha256: "fce77bd9de40a72d5ff992087c7fcda015a62493",
+            engine: Some("0.1.0"),
+            depends: [
+                ("base", "*"),
+            ],
+            yanked: false,
+        ),
+    ],
+)
