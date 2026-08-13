@@ -1,9 +1,11 @@
 (
-    updated: [
-        ("quiet_voice", "0.2.0"),
-    ],
+    updated: [],
     flagged: [
         "furniture_x 0.1.0: re-tag — the index keeps fce77bd9",
+        "furniture_y 0.1.0: pack.ron names \'furniture_x\', registered as \'furniture_y\'",
+        "furniture_y 0.2.0: pack.ron names \'furniture_x\', registered as \'furniture_y\'",
     ],
-    skipped: [],
+    skipped: [
+        "quiet_voice: suspended",
+    ],
 )
