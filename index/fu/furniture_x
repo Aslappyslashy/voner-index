@@ -13,5 +13,15 @@
             ],
             yanked: false,
         ),
+        (
+            version: "0.2.0",
+            url: "https://github.com/Aslappyslashy/voner-pack-furniture",
+            sha256: "8be9414f3a272f00075e18c5f9a32062f12946e2",
+            engine: Some("0.1.0"),
+            depends: [
+                ("base", "*"),
+            ],
+            yanked: false,
+        ),
     ],
 )

@@ -1,7 +1,6 @@
 (
     updated: [
-        ("furniture_x", "0.1.0"),
-        ("quiet_voice", "0.1.0"),
+        ("furniture_x", "0.2.0"),
     ],
     flagged: [],
     skipped: [],
