@@ -1,7 +1,7 @@
 (
-    updated: [
-        ("furniture_x", "0.2.0"),
+    updated: [],
+    flagged: [
+        "furniture_x 0.1.0: re-tag — the index keeps fce77bd9",
     ],
-    flagged: [],
     skipped: [],
 )
