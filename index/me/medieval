@@ -3,6 +3,6 @@
     description: Some("the example world: a small medieval town and its tavern"),
     role: Some("world"),
     versions: [
-        (version: "0.1.0", url: "https://github.com/Aslappyslashy/voner-pack-medieval", sha256: "c3f9f977e307569e695809f855e84c31d932eec1", engine: Some("0.1.0"), depends: [("base", "*")], yanked: false),
+        (version: "0.1.0", url: "https://github.com/voner-game/voner-pack-medieval", sha256: "c3f9f977e307569e695809f855e84c31d932eec1", engine: Some("0.1.0"), depends: [("base", "*")], yanked: false),
     ],
 )

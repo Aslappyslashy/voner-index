@@ -3,6 +3,6 @@
     description: Some("the setting-agnostic content library: generic materials, items, states, narration text"),
     role: Some("library"),
     versions: [
-        (version: "0.1.0", url: "https://github.com/Aslappyslashy/voner-pack-base", sha256: "f70f8052b052dda7277e96ef572a39caa4fac8f5", engine: Some("0.1.0"), depends: [], yanked: false),
+        (version: "0.1.0", url: "https://github.com/voner-game/voner-pack-base", sha256: "f70f8052b052dda7277e96ef572a39caa4fac8f5", engine: Some("0.1.0"), depends: [], yanked: false),
     ],
 )
