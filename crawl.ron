@@ -1,5 +1,8 @@
 (
     updated: [],
-    flagged: [],
+    flagged: [
+        "furniture_y 0.1.0: pack.ron names \'furniture_x\', registered as \'furniture_y\'",
+        "furniture_y 0.2.0: pack.ron names \'furniture_x\', registered as \'furniture_y\'",
+    ],
     skipped: [],
 )
