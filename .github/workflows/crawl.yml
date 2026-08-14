@@ -1,0 +1,38 @@
+# the crawl, self-driving: thrice hourly, on demand, and immediately
+# when a registration lands (push to repos/** — the bot's auto-merge
+# included). the crawler's own pushes touch only index/ + crawl.ron
+# and don't retrigger (and GITHUB_TOKEN pushes never fire workflows).
+# ci/crawl.py is a self-contained port of voner-crawl's rules — the
+# engine repo isn't on GitHub, so the index carries its own crawler.
+name: crawl
+
+on:
+  schedule:
+    - cron: "7,27,47 * * * *"
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["repos/**"]
+
+permissions:
+  contents: write
+
+jobs:
+  crawl:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: crawl
+        run: python3 ci/crawl.py .
+      - name: commit + push
+        run: |
+          git config user.email "crawl@voner-index"
+          git config user.name "voner-crawl[bot]"
+          git add crawl.ron
+          if [ -d index ]; then git add index; fi
+          if git diff --cached --quiet; then
+            echo "no changes"
+          else
+            git commit -m "crawl"
+            git push
+          fi
