@@ -1,0 +1,17 @@
+(
+    name: "hallway_seats",
+    description: None,
+    role: Some("library"),
+    versions: [
+        (
+            version: "0.1.0",
+            url: "https://github.com/Aslappyslashy/voner-pack-hallway",
+            sha256: "5b630b4c37c82d7be4aa44aea576fc2491c9d6b7",
+            engine: Some("0.1.0"),
+            depends: [
+                ("furniture_x", "=0.2.0"),
+            ],
+            yanked: false,
+        ),
+    ],
+)
