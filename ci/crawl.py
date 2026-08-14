@@ -96,14 +96,15 @@ def manifest_depends(text):
     # parens, so bare-name extraction afterwards sees none of it
     # structured entries first — the pattern swallows Some("...")'s
     # parens and the pretty-printer's trailing comma, so bare-name
-    # extraction afterwards sees none of it
+    # extraction afterwards sees none of it. names strip to the
+    # basename ("../base" means the pack NAMED base)
     structured = (r'\(\s*name:\s*"([^"]+)"'
                   r'(?:\s*,\s*constraint:\s*Some\("([^"]+)"\))?\s*,?\s*\)')
-    out = [(name, constraint or "*")
+    out = [(name.rsplit("/", 1)[-1], constraint or "*")
            for name, constraint in re.findall(structured, body)]
     bare = re.sub(structured, " ", body)
     for name in re.findall(r'"([^"]+)"', bare):
-        out.append((name, "*"))
+        out.append((name.rsplit("/", 1)[-1], "*"))
     return out
 
 def infer_role(root_files, declared):
