@@ -1,7 +1,5 @@
 (
-    updated: [
-        ("hallway_seats", "0.1.0"),
-    ],
+    updated: [("furniture_x", "0.3.0")],
     flagged: [],
     skipped: [],
 )
